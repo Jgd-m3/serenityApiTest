@@ -85,6 +85,7 @@ Feature: Testing Api Rest on http://fakerestapi.azurewebsites.net
     Then the response of the server should be 200
     And the returned identificator of the book is the same <id>
     And we check the data
+    #JAJAJAJAJJAJA
     Examples:
       | id | point     | fieldsArray                                             | valuesArray                                                                            |
       | 2  | api/Books | ID#!Title#!Description#!PageCount#!Excerpt#!PublishDate | 2#!El burraco#!Un libro mu bonito#!402#!I dont know#!2017-10-25T06:51:04.4391246+00:00 |
