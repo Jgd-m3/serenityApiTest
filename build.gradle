@@ -1,0 +1,42 @@
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven{
+            url "http://central.maven.org/maven2/"
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:1.5.2")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+repositories {
+    maven{
+        url "http://central.maven.org/maven2/"
+    }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber
+    compile group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '1.5.4'
+    compile group: 'net.serenity-bdd', name: 'serenity-core', version: '1.5.2'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
+    compile group: 'net.serenity-bdd', name: 'serenity-rest-assured', version: '1.5.2'
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test{
+    // turn off html reports... windows can't handle certain cucumber test name characters.
+    test.reports.getHtml().enabled = false
+    systemProperties System.getProperties()
+    testLogging.showStandardStreams = true
+    include 'api/rest/test/runner/Runner.class'
+}
+
+
