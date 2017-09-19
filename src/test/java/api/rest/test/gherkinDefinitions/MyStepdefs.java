@@ -89,4 +89,35 @@ public class MyStepdefs {
     public void iTestArrayValues(List<String> arg0) throws Throwable {
         System.out.println("Longitud: "+arg0.size());
     }
+
+    //the same but more readable gherkin definitions
+    @Given("^the next entry point\"([^\"]*)\" with our database$")
+    public void theNextEntryPointWithOurDatabase(String arg0) throws Throwable {
+        apiSteps.postData(arg0);
+    }
+
+    @When("^and adding the next data \"([^\"]*)\" with values \"([^\"]*)\"$")
+    public void andAddingTheNextDataWithValues(String arg0, String arg1) throws Throwable {
+        apiSteps.splitTheFieldsAndValues(arg0, arg1);
+    }
+
+    @And("^send the the data to the server$")
+    public void sendTheTheDataToTheServer() throws Throwable {
+        apiSteps.sendPost();
+    }
+
+    @Then("^the response of the server should be (\\d+)$")
+    public void theResponseOfTheServerShouldBe(int arg0) throws Throwable {
+        apiSteps.checkStatusCodePost(arg0);
+    }
+
+    @And("^the returned identificator of the book is the same (\\d+)$")
+    public void theReturnedIdentificatorOfTheBookIsTheSameId(int arg0) throws Throwable {
+        apiSteps.checkIdOfTheResponse(arg0);
+    }
+
+    @And("^we check the data$")
+    public void weCheckTheData() throws Throwable {
+        apiSteps.checkTheFieldsOfTheResponse();
+    }
 }

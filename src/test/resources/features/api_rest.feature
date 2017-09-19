@@ -73,3 +73,19 @@ Feature: Testing Api Rest on http://fakerestapi.azurewebsites.net
 #    @test
 #    Scenario: Test array values
 #      Then I test array values "username,password"
+
+
+  #POST
+  @start_this
+  Scenario Outline: Inserting books in the DB
+
+    Given the next entry point"<point>" with our database
+    When and adding the next data "<fieldsArray>" with values "<valuesArray>"
+    And send the the data to the server
+    Then the response of the server should be 200
+    And the returned identificator of the book is the same <id>
+    And we check the data
+    Examples:
+      | id | point     | fieldsArray                                             | valuesArray                                                                            |
+      | 2  | api/Books | ID#!Title#!Description#!PageCount#!Excerpt#!PublishDate | 2#!El burraco#!Un libro mu bonito#!402#!I dont know#!2017-10-25T06:51:04.4391246+00:00 |
+      | 12 | api/Books | ID#!Title#!PageCount#!PublishDate                       | 12#!La cabrilla#!617#!2017-10-23T06:51:04.4391246+00:00                                |
